@@ -30,11 +30,11 @@ class assert_dim(object):
     dim = self.dim
     which_dim = [i is not None for i in dim]
     if all(which_dim):
-      assert d.shape == dim, "Dimensions do not match expected"
+      assert d.shape == dim, "Dimensions do not match expected ({}, {})".format(dim[0], dim[1])
     elif which_dim[0]:
-      assert d.shape[0] == dim[0], "Number of rows do not match expected"
+      assert d.shape[0] == dim[0], "Number of rows do not match expected ({})".format(dim[0])
     else:
-      assert d.shape[1] == dim[1], "Number of columns do not match expected"
+      assert d.shape[1] == dim[1], "Number of columns do not match expected ({})".format(dim[1])
 
   def __call__(self, function, *args, **kwargs):
     def wrapper(*args, **kwargs):
