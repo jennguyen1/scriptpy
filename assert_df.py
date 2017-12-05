@@ -6,7 +6,7 @@ from functools import wraps
 def assert_cols_in(d, cols):
   """Asserts that columns are in a data frame"""
 
-  assert isinstance(d, pd.DataFrame), "Input d is not a pandas DataFrame"
+  assert isinstance(d, pandas.DataFrame), "Input d is not a pandas DataFrame"
   assert isinstance(cols, list), "Input cols is not a list"
 
   col_check = [c for c in cols if c not in d.columns]  
