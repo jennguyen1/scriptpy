@@ -3,7 +3,7 @@ import logging
 from functools import wraps
 
 
-def log_function_name(function):
+def report_function_name(function):
   """Wrapper function, logs functions name"""
   
   @wraps(function)
