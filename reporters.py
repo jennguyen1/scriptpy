@@ -8,7 +8,9 @@ def report_function_name(function):
   
   @wraps(function)
   def wrapper(*args, **kwargs):
-    logging.info(function.__name__.replace("_", " ").title())
+    func_msg = function.__name__.replace("_", " ").title()
+    func_msg = "### {} ###".format(func_msg)
+    logging.info(func_msg)
     
     return function(*args, **kwargs)
   return wrapper
@@ -45,13 +47,13 @@ def report_dim(function):
     dim_before = data.shape
     dim_after = result.shape
 
-    logging.info("Incoming dat cols: {}".format(dim_before[1]))
-    logging.info("Outgoing dat cols: {}".format(dim_after[1]))
-    logging.info("Change in cols: {}".format(dim_after[1] - dim_before[1]))
-    
     logging.info("Incoming dat rows: {}".format(dim_before[0]))
     logging.info("Outgoing dat rows: {}".format(dim_after[0]))
     logging.info("Change in rows: {}".format(dim_after[0] - dim_before[0]))
+
+    logging.info("Incoming dat cols: {}".format(dim_before[1]))
+    logging.info("Outgoing dat cols: {}".format(dim_after[1]))
+    logging.info("Change in cols: {}".format(dim_after[1] - dim_before[1]))
     
     return result
   return wrapper
