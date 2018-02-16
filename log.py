@@ -3,9 +3,6 @@ import logging
 import logging.config
 import json
 import argparse
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
 #' initiate the logging
 def start_logging(config = None):
@@ -49,26 +46,29 @@ def process_args(parser = None):
 
   return args
 
-#' sends notification eamil
-def send_notification(email, subject = 'Notification', msg = ''):
-  """
-  Sends an email 
-  """
+#' sends notification email
+def send_notification(email, subj = 'Notification', msg = ''):
+  import smtplib
+  from email.mime.multipart import MIMEMultipart
+  from email.mime.text import MIMEText
+  
+  #creates the sender, recipient, subject, and message fields
   sender = 'automatique.sender@gmail.com'
   receivers = email
   message = MIMEMultipart()
   message['From'] = sender
   message['To'] = receivers
-  message['Subject'] = subject
-  body = msg
-  message.attach(MIMEText(body, 'plain'))
+  message['Subject'] = subj
+  message.attach(MIMEText(msg, 'plain'))
   
   try:
+    #log into the gmail server
     password = 'autoGMAIL'
     with smtplib.SMTP('smtp.gmail.com', 587) as server:
       server.ehlo()
       server.starttls()
       server.login(sender, password)
-      server.sendmail(sender, [receivers], message.as_string())
+      server.sendmail(sender, [receivers], message.as_string()) #sends the email
+    logging.info('Email sent successfully')
   except:
-    pass
+    logging.info('Error: email failed')
