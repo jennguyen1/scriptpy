@@ -62,13 +62,13 @@ def send_notification(email, subj = 'Notification', msg = ''):
   message.attach(MIMEText(msg, 'plain'))
   
   try:
-    #log into the gmail server
     password = 'autoGMAIL'
     with smtplib.SMTP('smtp.gmail.com', 587) as server:
       server.ehlo()
       server.starttls()
       server.login(sender, password)
       server.sendmail(sender, [receivers], message.as_string()) #sends the email
-    logging.info('Email sent successfully')
   except:
-    logging.info('Error: email failed')
+    mail_cmd = "echo {msg} | mail -s {subj} {email}".format(**locals())
+    subprocess.check_call(mail_cmd, shell = True)
+
