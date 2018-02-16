@@ -11,6 +11,7 @@ This package contains a variety of functions for reproducible research in Python
 * `start_logging()` initiates a logging session, using the logging package
 * `print_cmd_args()` prints out command line arguments to console and logfile if it exists
 * `process_args()` intiates a script by (1) start log, (2) process command line args, (3) log command line args
+* `send_notification()` sends an email
 
 **Reporters**
 * `report_function_name()` wrapper function, logs the function's name
