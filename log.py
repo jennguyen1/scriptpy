@@ -1,6 +1,7 @@
 import os
 import logging
 import logging.config
+import subprocess
 import json
 import argparse
 
@@ -69,6 +70,6 @@ def send_notification(email, subj = 'Notification', msg = ''):
       server.login(sender, password)
       server.sendmail(sender, [receivers], message.as_string()) #sends the email
   except:
-    mail_cmd = "echo {msg} | mail -s {subj} {email}".format(**locals())
+    mail_cmd = "echo '{msg}' | mail -s '{subj}' {email}".format(**locals())
     subprocess.check_call(mail_cmd, shell = True)
 
