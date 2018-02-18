@@ -54,7 +54,7 @@ def send_notification(email, subj = 'Notification', msg = ''):
   from email.mime.text import MIMEText
   
   #creates the sender, recipient, subject, and message fields
-  sender = 'automatique.sender@gmail.com'
+  sender = 'mail.autobot1@gmail.com'
   receivers = email
   message = MIMEMultipart()
   message['From'] = sender
